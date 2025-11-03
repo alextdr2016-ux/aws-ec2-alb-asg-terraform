@@ -9,6 +9,9 @@ on:
 jobs:
   terraform:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: envs/dev # 👈 se mută în directorul cu fișiere Terraform
 
     steps:
       - name: Checkout code
@@ -19,11 +22,11 @@ jobs:
         with:
           terraform_version: 1.6.0
 
-      - name: Initialize Terraform
+      - name: Terraform Init
         run: terraform init
 
-      - name: Format Check
+      - name: Terraform Format Check
         run: terraform fmt -check
 
-      - name: Validate
+      - name: Terraform Validate
         run: terraform validate
