@@ -19,6 +19,26 @@ Internet
 │
 [ Auto Scaling Group (ASG) ]
 
+### 📊 Visual Diagram (Mermaid)
+
+````mermaid
+graph TD
+    A[Internet Users 🌍] -->|HTTP (Port 80)| B(Application Load Balancer)
+    B --> C[Target Group]
+    C --> D1[EC2 Instance #1 - Apache]
+    C --> D2[EC2 Instance #2 - Apache]
+    C --> D3[EC2 Instance #3 - (optional scale out)]
+    B -->|Health Check| C
+    C --> E[Auto Scaling Group]
+    E --> F[Launch Template (Amazon Linux 2023)]
+    F --> G[User Data Script]
+    G --> H[/Apache Installed + Hello Page/]
+    B --> I[(Security Group ALB)]
+    D1 --> J[(Security Group EC2)]
+    D2 --> J
+    D3 --> J
+
+
 **Key AWS Services used**
 
 - EC2 (Amazon Linux 2023)
@@ -99,4 +119,4 @@ Alex Tudor
 Cloud Engineer & Founder — Ejolie / Fabrex
 📍 Romania | AWS Cloud | Terraform | DevOps
 
-```
+````
